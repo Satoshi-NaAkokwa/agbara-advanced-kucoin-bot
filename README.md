@@ -1,70 +1,66 @@
-# Agbara Advanced KuCoin Trading Bot 🚀
+# 🤖 Intelligent Self-Learning KuCoin Trading Bot
 
-An intelligent 24/7 autonomous KuCoin trading bot with local LLM integration - merged from `kucoin-profit-bot` and `agbara-kucoin-trading-bot`.
+[![Version](https://img.shields.io/badge/version-3.0.0-blue.svg)](https://github.com/Satoshi-NaAkokwa/agbara-advanced-kucoin-bot)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)](https://nodejs.org)
+
+An advanced, self-learning cryptocurrency trading bot for KuCoin with adaptive strategies, pattern recognition, and intelligent decision-making capabilities.
 
 ## 🌟 Features
 
-### Core Capabilities
-- 🤖 **Local LLM Integration** - Uses local LLM for intelligent trading decisions
-- 📊 **Multi-Strategy Trading** - Scalping, Momentum, Arbitrage, Moonshot strategies
-- 🛡️ **Advanced Risk Management** - Position sizing, stop-loss, daily limits
-- ⚡ **24/7 Autonomous Operation** - Dockerized for continuous trading
-- 📈 **Real-Time Market Analysis** - Technical indicators + AI-powered insights
+### Intelligent Trading
+- 🧠 **Self-Learning**: Learns from past trades and adapts strategies
+- 📊 **Pattern Recognition**: Identifies and learns from market patterns
+- 🔄 **Adaptive Strategies**: Automatically adjusts strategy weights based on performance
+- 🎯 **Multi-Strategy Approach**: Combines momentum, scalping, mean reversion, and pattern recognition
 
-### Trading Strategies
-1. **Scalping** (25% weight) - Quick trades on small price movements
-2. **Momentum** (35% weight) - Trend-following with MACD/EMA
-3. **Arbitrage** (20% weight) - Cross-exchange opportunities
-4. **Moonshot** (20% weight) - High-risk, high-reward explosive moves
+### Technical Analysis
+- 📈 **RSI (Relative Strength Index)**: Identifies overbought/oversold conditions
+- 📉 **MACD (Moving Average Convergence Divergence)**: Detects trend changes
+- 📊 **SMA/EMA (Simple/Exponential Moving Averages)**: Trend identification
+- 📏 **Bollinger Bands**: Volatility and price level analysis
+- 📊 **Volume Analysis**: Confirms price movements
 
-### Technical Indicators
-- RSI (Relative Strength Index)
-- MACD (Moving Average Convergence Divergence)
-- Bollinger Bands
-- EMA (Exponential Moving Average)
-- ATR (Average True Range)
-- Volume Analysis
+### Risk Management
+- 💰 **Position Sizing**: Dynamic based on confidence and portfolio
+- 🛡️ **Stop Loss/Take Profit**: Automatic risk management
+- 📉 **Daily Loss Limits**: Prevents excessive losses
+- 🔢 **Trade Frequency Limits**: Controls trading activity
+
+### Self-Learning Capabilities
+- 📚 **Trade History Analysis**: Learns from successful and failed trades
+- 🎓 **Pattern Database**: Builds a database of successful patterns
+- ⚖️ **Strategy Adaptation**: Adjusts strategy weights based on performance
+- 🧪 **Continuous Improvement**: Gets smarter with each trade
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 - Node.js 18+
-- Docker & Docker Compose
-- KuCoin API credentials
-- Local LLM (Ollama recommended)
+- KuCoin Account with API access
+- (Optional) Local LLM for enhanced decision-making
 
 ### Installation
 
-1. **Clone the repository**
 ```bash
+# Clone the repository
 git clone https://github.com/Satoshi-NaAkokwa/agbara-advanced-kucoin-bot.git
 cd agbara-advanced-kucoin-bot
-```
 
-2. **Install dependencies**
-```bash
+# Install dependencies
 npm install
-```
 
-3. **Configure environment**
-```bash
+# Configure environment
 cp .env.example .env
-# Edit .env with your KuCoin API credentials and LLM endpoint
-```
+# Edit .env with your KuCoin API credentials
 
-4. **Run with Docker (Recommended for 24/7)**
-```bash
-docker-compose up -d
-```
-
-5. **Run locally (Development)**
-```bash
+# Start the bot
 npm start
 ```
 
-## ⚙️ Configuration
+### Configuration
 
-### Environment Variables
+Edit the `.env` file with your settings:
 
 ```bash
 # KuCoin API Credentials
@@ -72,259 +68,387 @@ KUCOIN_API_KEY=your_api_key
 KUCOIN_SECRET_KEY=your_secret_key
 KUCOIN_API_PASSPHRASE=your_passphrase
 
-# Local LLM Configuration
-LLM_ENDPOINT=http://localhost:11434/api/generate
-LLM_MODEL=llama2
-LLM_TIMEOUT=30000
-
 # Trading Configuration
-MAX_POSITION_SIZE=1000
+MAX_POSITION_SIZE=50
 RISK_PER_TRADE=0.02
-MAX_DAILY_LOSS=500
+MAX_DAILY_LOSS=100
+
+# Self-Learning
+LEARNING_ENABLED=true
+ADAPTIVE_STRATEGIES=true
+PATTERN_RECOGNITION=true
+```
+
+## 📊 Trading Strategies
+
+### 1. Momentum Strategy (30% weight)
+- Follows market trends using MACD and moving averages
+- Buys on bullish momentum with RSI 50-70
+- Sells on bearish momentum with RSI 30-50
+- Adapts based on historical performance
+
+### 2. Mean Reversion Strategy (25% weight)
+- Identifies overbought/oversold conditions
+- Buys when RSI < 30 (oversold)
+- Sells when RSI > 70 (overbought)
+- Capitalizes on price reversals
+
+### 3. Scalping Strategy (25% weight)
+- Quick trades on volume spikes
+- Exploits short-term price movements
+- Uses volume analysis for confirmation
+- High frequency, small profit targets
+
+### 4. Pattern Recognition Strategy (20% weight)
+- Learns from historical patterns
+- Matches current conditions to past successful trades
+- Builds database of profitable patterns
+- Improves over time through learning
+
+## 🧠 Self-Learning System
+
+### How It Works
+
+1. **Trade Recording**: Every trade is recorded with:
+   - Market conditions (RSI, trend, volume)
+   - Strategy used
+   - Confidence level
+   - Outcome (profit/loss)
+
+2. **Pattern Recognition**:
+   - Identifies recurring market patterns
+   - Stores successful patterns with success rates
+   - Matches current conditions to historical patterns
+
+3. **Strategy Adaptation**:
+   - Tracks performance of each strategy
+   - Adjusts weights based on success rates
+   - Automatically rebalances strategy importance
+
+4. **Continuous Improvement**:
+   - Learns from mistakes
+   - Refines successful approaches
+   - Builds knowledge over time
+
+### Learning Data
+
+The bot stores learning data in `learning-data.json`:
+```json
+{
+  "tradeHistory": [...],
+  "patterns": [...],
+  "strategies": {...},
+  "lastSaved": 1234567890
+}
+```
+
+## 🔧 Advanced Configuration
+
+### Risk Management
+
+```bash
+# Position Sizing
+MAX_POSITION_SIZE=50          # Maximum USDT per trade
+RISK_PER_TRADE=0.02          # 2% risk per trade
+
+# Limits
+MAX_DAILY_LOSS=100           # Stop trading after $100 loss
+MAX_DAILY_TRADES=30          # Maximum 30 trades per day
+MAX_TRADES_PER_PAIR=5        # Maximum 5 trades per pair
+
+# Stop Loss/Take Profit
+STOP_LOSS_PCT=0.02           # 2% stop loss
+TAKE_PROFIT_PERCENT=5.0      # 5% take profit
+```
+
+### Strategy Configuration
+
+```bash
+# Strategy Selection
+STRATEGY=intelligent          # Options: hybrid, intelligent, momentum, scalping
+
+# Confidence Threshold
+MIN_CONFIDENCE=0.75          # Minimum 75% confidence to trade
+
+# Strategy Weights (should sum to 1.0)
+SCALPING_SIZE=0.10           # 10% allocation
+MOMENTUM_SIZE=0.15           # 15% allocation
+ARBITRAGE_SIZE=0.20          # 20% allocation
+MOONSHOT_SIZE=0.05           # 5% allocation
+```
+
+### Trading Pairs
+
+```bash
+# Main pairs
 TRADING_PAIRS=BTC-USDT,ETH-USDT,SOL-USDT
 
-# Risk Management
-STOP_LOSS_PCT=0.02
-TAKE_PROFIT_PCT=0.05
-MAX_DAILY_TRADES=50
+# Strategy-specific pairs
+SCALPING_PAIRS=SOL-USDT,DOGE-USDT,PEPE-USDT,WIF-USDT,BONK-USDT
+MOMENTUM_PAIRS=BTC-USDT,ETH-USDT,SOL-USDT,XRP-USDT
+ARBITRAGE_PAIRS=BTC-USDT,ETH-USDT,SOL-USDT
+MOONSHOT_PAIRS=PEPE-USDT,WIF-USDT,BONK-USDT,FLOKI-USDT,SHIB-USDT
+```
 
-# Telegram Notifications
-TELEGRAM_ENABLED=true
-TELEGRAM_BOT_TOKEN=your_bot_token
-TELEGRAM_CHAT_ID=your_chat_id
+## 📈 Performance Monitoring
+
+### Logs
+
+The bot generates detailed logs in `logs/intelligent-bot.log`:
+
+```
+2026-05-18 16:51:30 [INFO] 🤖 Starting Intelligent Self-Learning Trading Bot
+2026-05-18 16:51:30 [INFO] 💵 Total Portfolio Value: $9.68
+2026-05-18 16:51:30 [INFO] 📊 Strategies initialized
+2026-05-18 16:51:30 [INFO] 🔄 Trading Cycle #1
+```
+
+### PM2 Monitoring
+
+```bash
+# View real-time logs
+pm2 logs agbara-intelligent-bot
+
+# Monitor resource usage
+pm2 monit
+
+# Check status
+pm2 status
+```
+
+### Telegram Notifications
+
+Enable Telegram notifications for:
+- Trade executions
+- Error alerts
+- Daily summaries
+- Portfolio updates
+
+## 🛡️ Security
+
+### Best Practices
+
+1. **API Keys**:
+   - Never commit `.env` file to git
+   - Use API keys with limited permissions
+   - Enable IP whitelist on KuCoin
+   - Regularly rotate keys
+
+2. **Position Sizing**:
+   - Start with small amounts
+   - Test in simulation mode first
+   - Gradually increase as bot proves itself
+
+3. **Risk Management**:
+   - Set appropriate daily loss limits
+   - Monitor bot performance regularly
+   - Have an emergency stop plan
+
+### .gitignore
+
+The repository includes comprehensive `.gitignore`:
+```
+.env
+.env.local
+node_modules/
+logs/
+*.log
+learning-data.json
+```
+
+## 📦 Deployment
+
+### Local Deployment with PM2
+
+```bash
+# Install PM2
+npm install -g pm2
+
+# Start bot
+pm2 start intelligent-bot.js --name "agbara-intelligent-bot"
+
+# Save PM2 configuration
+pm2 save
+
+# Setup auto-start on boot
+pm2 startup
+```
+
+### Docker Deployment
+
+```bash
+# Build image
+docker build -t agbara-kucoin-bot .
+
+# Run container
+docker run -d \
+  --name kucoin-bot \
+  --env-file .env \
+  -v $(pwd)/logs:/app/logs \
+  agbara-kucoin-bot
+
+# Or use docker-compose
+docker-compose up -d
+```
+
+## 🧪 Testing
+
+### Test API Connection
+
+```bash
+node test-api.js
+```
+
+### Run in Simulation Mode
+
+Set in `.env`:
+```bash
+NODE_ENV=development
+```
+
+### Backtest Strategies
+
+```bash
+npm run backtest
 ```
 
 ## 📊 Architecture
 
 ```
 agbara-advanced-kucoin-bot/
+├── intelligent-bot.js          # Main self-learning bot
+├── live-bot.js                 # Basic live trading bot
+├── simulate-bot.js             # Simulation mode bot
 ├── src/
 │   ├── core/
-│   │   └── kucoin-connector.js    # KuCoin API wrapper
-│   ├── llm-client.js              # Local LLM integration
-│   ├── risk-manager.js            # Advanced risk management
-│   ├── technical-analysis.js      # Technical indicators
-│   └── strategy-engine.js         # Multi-strategy engine
-├── index.js                       # Main bot entry point
-├── Dockerfile                     # Docker configuration
-├── docker-compose.yml             # Docker Compose setup
-└── package.json                   # Dependencies
+│   │   └── kucoin-connector.js # KuCoin API wrapper
+│   ├── llm-client.js           # Local LLM integration
+│   ├── risk-manager.js         # Risk management
+│   ├── technical-analysis.js   # Technical indicators
+│   └── strategy-engine.js      # Strategy execution
+├── logs/                       # Log files
+├── learning-data.json          # Self-learning data
+├── .env                        # Configuration (not in git)
+├── .env.example                # Configuration template
+└── package.json                # Dependencies
 ```
 
-## 🧠 Local LLM Integration
+## 🔄 How It Works
 
-The bot uses your local LLM for intelligent trading decisions:
+### Trading Cycle
 
-### Setup Ollama (Recommended)
-```bash
-# Install Ollama
-curl -fsSL https://ollama.com/install.sh | sh
+1. **Market Analysis**:
+   - Fetch current prices and klines
+   - Calculate technical indicators
+   - Determine market trends
 
-# Pull a model
-ollama pull llama2
+2. **Signal Generation**:
+   - Each strategy analyzes market data
+   - Generates buy/sell signals with confidence
+   - Signals combined with weighted voting
 
-# Start Ollama server
-ollama serve
+3. **Trade Execution**:
+   - Calculate position size based on confidence
+   - Check risk management rules
+   - Execute trade if all checks pass
+
+4. **Learning**:
+   - Record trade details
+   - Analyze outcomes
+   - Update strategy weights
+   - Store successful patterns
+
+### Adaptive Weight Adjustment
+
+The bot continuously adjusts strategy weights based on performance:
+
+```
+Initial:     Momentum 30%, Scalping 25%, Mean Reversion 25%, Pattern 20%
+After 100 trades: Momentum 35%, Scalping 20%, Mean Reversion 30%, Pattern 15%
 ```
 
-### LLM Decision Process
-1. **Market Analysis** - Analyzes technical indicators and market data
-2. **Signal Generation** - Provides BUY/SELL/HOLD recommendations
-3. **Confidence Scoring** - Rates decision confidence (0.0-1.0)
-4. **Reasoning** - Explains the logic behind each decision
+## 🐛 Troubleshooting
 
-### Fallback Mechanism
-If LLM is unavailable, the bot automatically falls back to rule-based trading strategies.
+### Common Issues
 
-## 🛡️ Risk Management
+1. **API Connection Failed**
+   ```
+   Solution: Check API keys and permissions
+   Verify IP whitelist on KuCoin
+   ```
 
-### Multi-Layer Protection
-- **Position Size Limits** - Maximum $1000 per position
-- **Daily Loss Limits** - Stops trading after $500 daily loss
-- **Risk Per Trade** - Maximum 2% of capital per trade
-- **Stop-Loss/Take-Profit** - Automatic exit at 2% loss / 5% profit
-- **Trade Frequency Limits** - Maximum 50 trades per day
+2. **Insufficient Balance**
+   ```
+   Solution: Ensure minimum USDT balance
+   Adjust MAX_POSITION_SIZE in .env
+   ```
 
-### Portfolio Protection
-- Dynamic position sizing based on confidence
-- Automatic position monitoring and exit
-- Daily risk counter reset at midnight
-- Real-time P&L tracking
+3. **Invalid Order Size**
+   ```
+   Solution: Check KuCoin minimum order requirements
+   Increase position size or add funds
+   ```
 
-## 📈 Trading Process
+4. **Learning Not Working**
+   ```
+   Solution: Ensure LEARNING_ENABLED=true
+   Check write permissions for learning-data.json
+   ```
 
-1. **Market Data Collection** - Real-time price and volume data
-2. **Technical Analysis** - Calculate indicators (RSI, MACD, etc.)
-3. **Strategy Evaluation** - Execute all 4 trading strategies
-4. **LLM Decision** - Get AI-powered trading recommendation
-5. **Signal Combination** - Weighted combination of strategies + LLM
-6. **Risk Assessment** - Validate against risk management rules
-7. **Trade Execution** - Place orders via KuCoin API
-8. **Position Monitoring** - Track open positions and exit conditions
-9. **Notification** - Send Telegram alerts for trades and errors
-
-## 🐳 Docker Deployment
-
-### Build and Run
-```bash
-# Build the Docker image
-docker build -t agbara-kucoin-bot .
-
-# Run with Docker Compose (Recommended)
-docker-compose up -d
-
-# Check logs
-docker-compose logs -f
-
-# Stop the bot
-docker-compose down
-```
-
-### Docker Features
-- **Auto-restart** - `restart: unless-stopped` ensures 24/7 operation
-- **Health checks** - Monitors bot health every 30 seconds
-- **Resource limits** - CPU and memory constraints
-- **Log rotation** - Automatic log file management
-- **Volume mounting** - Persistent logs and models
-
-## 📱 Notifications
-
-### Telegram Integration
-The bot sends real-time notifications via Telegram:
-
-- **Trade Executed** - When a trade is placed
-- **Trade Errors** - When trade execution fails
-- **Daily Summary** - End-of-day trading summary
-- **System Alerts** - Bot health and status updates
-
-### Configure Telegram
-1. Create a bot via [@BotFather](https://t.me/BotFather)
-2. Get your bot token
-3. Start a conversation with your bot
-4. Get your chat ID via [@userinfobot](https://t.me/userinfobot)
-5. Add credentials to `.env`
-
-## 🔍 Monitoring
-
-### Check Bot Status
-```bash
-# View logs
-docker-compose logs -f kucoin-bot
-
-# Check container status
-docker ps | grep agbara-kucoin-bot
-
-# Health check
-docker inspect agbara-kucoin-bot | grep -A 10 Health
-```
-
-### Log Files
-- `logs/bot.log` - Main bot activity log
-- `logs/llm-integration.log` - LLM decision logs
-- `logs/risk-manager.log` - Risk management logs
-
-## 🧪 Testing
-
-### Test API Connection
-```bash
-npm test
-```
-
-### Backtesting
-```bash
-npm run backtest
-```
-
-### Manual Trade
-```bash
-npm run manual-trade
-```
-
-## 🔄 Updating
-
-### Pull Latest Changes
-```bash
-git pull origin main
-docker-compose down
-docker-compose up -d --build
-```
-
-### Update Dependencies
-```bash
-npm update
-docker-compose build --no-cache
-docker-compose up -d
-```
-
-## 🛠️ Troubleshooting
-
-### Bot Not Starting
-1. Check environment variables in `.env`
-2. Verify KuCoin API credentials
-3. Ensure LLM endpoint is accessible
-4. Check Docker logs: `docker-compose logs`
-
-### Trades Not Executing
-1. Verify risk management limits
-2. Check daily trade counters
-3. Ensure sufficient account balance
-4. Review confidence thresholds
-
-### LLM Connection Issues
-1. Verify LLM endpoint is running
-2. Check firewall settings
-3. Bot will automatically fall back to rule-based trading
-
-## 📊 Performance Metrics
+## 📈 Performance Metrics
 
 The bot tracks:
-- Daily P&L
-- Win rate
-- Average trade duration
-- Risk-adjusted returns
-- Strategy performance
-
-## 🔒 Security
-
-- Credentials stored in environment variables (never in code)
-- Non-root Docker user
-- Rate limiting on API calls
-- Input validation and sanitization
-- Error handling and logging
-
-## 📝 License
-
-MIT License - See LICENSE file for details
+- Win rate per strategy
+- Average profit per trade
+- Maximum drawdown
+- Strategy performance over time
+- Pattern success rates
 
 ## 🤝 Contributing
 
-Contributions welcome! Please:
+Contributions are welcome! Please:
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
 4. Submit a pull request
 
+## 📝 License
+
+MIT License - See [LICENSE](LICENSE) file for details
+
 ## ⚠️ Disclaimer
 
 **TRADING CRYPTOCURRENCIES INVOLVES SUBSTANTIAL RISK OF LOSS**
 
-This software is provided "AS IS" without warranty of any kind. The authors assume no liability for any damages or losses arising from the use of this software. Past performance does not guarantee future results.
+This software is provided "AS IS" without warranty of any kind. The authors assume no liability for any damages or losses arising from the use of this software.
 
-**ALWAYS:**
+**IMPORTANT:**
 - Start with small amounts
-- Understand the risks
+- Test thoroughly before live trading
 - Never invest more than you can afford to lose
 - Monitor the bot regularly
 - Keep credentials secure
 
 ## 📞 Support
 
-For issues and questions:
-- GitHub Issues: [Create an issue](https://github.com/Satoshi-NaAkokwa/agbara-advanced-kucoin-bot/issues)
-- Telegram: @Agbara_AI_bot
+- **Issues**: [GitHub Issues](https://github.com/Satoshi-NaAkokwa/agbara-advanced-kucoin-bot/issues)
+- **Telegram**: @Agbara_AI_bot
+- **Documentation**: [Full Documentation](https://github.com/Satoshi-NaAkokwa/agbara-advanced-kucoin-bot/wiki)
+
+## 🎯 Roadmap
+
+- [ ] Enhanced LLM integration with multi-model support
+- [ ] Advanced portfolio optimization
+- [ ] Multi-exchange support
+- [ ] Web dashboard for monitoring
+- [ ] Advanced backtesting system
+- [ ] Machine learning models for prediction
+- [ ] Social trading features
 
 ---
 
-**Built by Agbara for Agbara-Okenze** 🚀
+**Built by Agbara** 🤖
 
-*Merged from kucoin-profit-bot and agbara-kucoin-trading-bot with local LLM integration*
+*Intelligent, Self-Learning, Profitable*
+
+*Version 3.0.0 - The Future of Automated Trading*

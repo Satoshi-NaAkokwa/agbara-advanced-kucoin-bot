@@ -4,6 +4,8 @@ yarn-debug.log*
 yarn-error.log*
 .env
 .env.local
+.env.production
+*.env
 logs/
 *.log
 .DS_Store
@@ -15,3 +17,13 @@ dist/
 build/
 models/
 .git/
+learning-data.json
+*.pid
+*.seed
+*.pid.lock
+.npm
+.eslintcache
+.node_repl_history
+*.tgz
+.yarn-integrity
+.cache

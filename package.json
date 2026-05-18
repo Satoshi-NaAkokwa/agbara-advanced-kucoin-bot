@@ -1,46 +1,55 @@
 {
   "name": "agbara-advanced-kucoin-bot",
   "version": "3.0.0",
-  "description": "Advanced autonomous KuCoin trading bot with local LLM integration - Merged from kucoin-profit-bot and agbara-kucoin-trading-bot",
-  "main": "index.js",
+  "description": "Intelligent self-learning cryptocurrency trading bot for KuCoin with adaptive strategies, pattern recognition, and AI-powered decision making",
+  "main": "intelligent-bot.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "node --watch index.js",
-    "test": "node test/test.js",
+    "start": "node intelligent-bot.js",
+    "live": "node live-bot.js",
+    "simulate": "node simulate-bot.js",
+    "test": "node test-api.js",
     "backtest": "node backtest.js",
-    "train": "node train-ml-model.js",
-    "docker:build": "docker build -t agbara-kucoin-bot .",
-    "docker:run": "docker run -d --name agbara-kucoin-bot --restart unless-stopped agbara-kucoin-bot",
-    "docker:stop": "docker stop agbara-kucoin-bot && docker rm agbara-kucoin-bot",
-    "docker:logs": "docker logs -f agbara-kucoin-bot"
+    "logs": "pm2 logs agbara-intelligent-bot",
+    "restart": "pm2 restart agbara-intelligent-bot",
+    "stop": "pm2 stop agbara-intelligent-bot",
+    "status": "pm2 status"
   },
   "keywords": [
     "kucoin",
-    "trading",
-    "bot",
-    "ai",
-    "llm",
+    "trading-bot",
     "cryptocurrency",
+    "bitcoin",
+    "ethereum",
+    "solana",
+    "self-learning",
+    "adaptive",
+    "pattern-recognition",
+    "technical-analysis",
+    "algorithmic-trading",
+    "ai-trading",
     "automated-trading",
-    "ml",
-    "24/7"
+    "nodejs"
   ],
-  "author": "Agbara for Agbara-Okenze",
+  "author": "Agbara",
   "license": "MIT",
-  "dependencies": {
-    "axios": "^1.6.0",
-    "crypto-js": "^4.2.0",
-    "dotenv": "^16.3.1",
-    "node-cron": "^3.0.3",
-    "technicalindicators": "^3.1.0",
-    "winston": "^3.11.0",
-    "ws": "^8.14.0",
-    "@tensorflow/tfjs-node": "^4.22.0",
-    "nodemailer": "^6.10.1",
-    "tulind": "^0.8.20"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Satoshi-NaAkokwa/agbara-advanced-kucoin-bot.git"
   },
+  "bugs": {
+    "url": "https://github.com/Satoshi-NaAkokwa/agbara-advanced-kucoin-bot/issues"
+  },
+  "homepage": "https://github.com/Satoshi-NaAkokwa/agbara-advanced-kucoin-bot#readme",
   "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=9.0.0"
-  }
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "technicalindicators": "^3.0.0",
+    "tulind": "^0.8.20",
+    "winston": "^3.17.0",
+    "node-cron": "^3.0.3"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {}
 }
