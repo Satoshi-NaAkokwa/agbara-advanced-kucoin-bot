@@ -1,0 +1,19 @@
+[Unit]
+Description=Agbara Advanced KuCoin Trading Bot
+After=network.target docker.service
+Requires=docker.service
+
+[Service]
+Type=notify
+NotifyAccess=all
+WorkingDirectory=/home/openclaw/.openclaw/workspace/agbara-advanced-kucoin-bot
+ExecStart=/usr/bin/docker-compose up
+ExecStop=/usr/bin/docker-compose down
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=agbara-kucoin-bot
+
+[Install]
+WantedBy=multi-user.target

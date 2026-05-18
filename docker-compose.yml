@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  kucoin-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agbara-kucoin-bot
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - LOG_LEVEL=info
+      - TZ=Asia/Singapore
+    env_file:
+      - .env
+    volumes:
+      - ./logs:/app/logs
+      - ./models:/app/models
+    ports:
+      - "3000:3000"
+    networks:
+      - trading-network
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('fs').statSync('logs/bot.log').mtime.getTime() > Date.now() - 120000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+networks:
+  trading-network:
+    driver: bridge
+
+volumes:
+  logs:
+  models:

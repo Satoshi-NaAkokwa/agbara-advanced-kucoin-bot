@@ -1,0 +1,46 @@
+{
+  "name": "agbara-advanced-kucoin-bot",
+  "version": "3.0.0",
+  "description": "Advanced autonomous KuCoin trading bot with local LLM integration - Merged from kucoin-profit-bot and agbara-kucoin-trading-bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "test": "node test/test.js",
+    "backtest": "node backtest.js",
+    "train": "node train-ml-model.js",
+    "docker:build": "docker build -t agbara-kucoin-bot .",
+    "docker:run": "docker run -d --name agbara-kucoin-bot --restart unless-stopped agbara-kucoin-bot",
+    "docker:stop": "docker stop agbara-kucoin-bot && docker rm agbara-kucoin-bot",
+    "docker:logs": "docker logs -f agbara-kucoin-bot"
+  },
+  "keywords": [
+    "kucoin",
+    "trading",
+    "bot",
+    "ai",
+    "llm",
+    "cryptocurrency",
+    "automated-trading",
+    "ml",
+    "24/7"
+  ],
+  "author": "Agbara for Agbara-Okenze",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^16.3.1",
+    "node-cron": "^3.0.3",
+    "technicalindicators": "^3.1.0",
+    "winston": "^3.11.0",
+    "ws": "^8.14.0",
+    "@tensorflow/tfjs-node": "^4.22.0",
+    "nodemailer": "^6.10.1",
+    "tulind": "^0.8.20"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
