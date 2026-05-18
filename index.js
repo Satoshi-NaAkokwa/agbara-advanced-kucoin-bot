@@ -13,11 +13,11 @@ const cron = require('node-cron');
 const winston = require('winston');
 
 // Import merged components
-const KuCoinConnector = require('./core/kucoin-connector');
-const LocalLLMClient = require('./llm-client');
-const AdvancedRiskManager = require('./risk-manager');
-const TechnicalAnalysis = require('./technical-analysis');
-const StrategyEngine = require('./strategy-engine');
+const KuCoinConnector = require('./src/core/kucoin-connector');
+const LocalLLMClient = require('./src/llm-client');
+const AdvancedRiskManager = require('./src/risk-manager');
+const TechnicalAnalysis = require('./src/technical-analysis');
+const StrategyEngine = require('./src/strategy-engine');
 
 // Configure logging
 const logger = winston.createLogger({
