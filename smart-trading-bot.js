@@ -729,12 +729,12 @@ Response:`;
     }
     
     // Generate signal
-    if (buyScore >= 0.5) {
+    if (buyScore >= 0.40) {
       signal.action = 'buy';
       signal.confidence = Math.min(buyScore, 0.9);
       signal.reasons = reasons;
       this.setRiskManagement(signal, data, 'momentum');
-    } else if (sellScore >= 0.5) {
+    } else if (sellScore >= 0.40) {
       signal.action = 'sell';
       signal.confidence = Math.min(sellScore, 0.9);
       signal.reasons = reasons;
