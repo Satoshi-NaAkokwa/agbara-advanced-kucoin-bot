@@ -854,6 +854,7 @@ Response:`;
     const { rsi, volume, avgVolume, priceChange1h, priceChange24h, trend } = data;
     
     let buyScore = 0;
+    let sellScore = 0;
     const reasons = [];
     
     // Moonshot: high risk, high reward
@@ -877,13 +878,6 @@ Response:`;
       signal.confidence = Math.min(buyScore, 0.75); // Cap confidence for moonshots
       signal.reasons = reasons;
       this.setRiskManagement(signal, data, 'moonshot');
-    } else if (sellScore >= 0.5) {
-      signal.action = 'sell';
-      signal.confidence = Math.min(sellScore, 0.75);
-      signal.reasons = reasons;
-      signal.positionSize = this.portfolio.usdt * 0.3; // Smaller for moonshot sells
-      signal.stopLoss = data.price * 1.015;
-      signal.takeProfit = data.price * 0.97;
     }
   }
   
