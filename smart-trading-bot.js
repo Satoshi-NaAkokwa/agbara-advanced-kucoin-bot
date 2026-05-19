@@ -673,7 +673,11 @@ Response:`;
     
     // Apply sentiment adjustment
     if (signal.action !== 'hold') {
+      const originalConfidence = signal.confidence;
       signal.confidence = this.adjustForSentiment(signal.confidence);
+      if (signal.confidence >= CONFIG.minConfidence) {
+        logger.info(`  ${pair} (${strategy}): ${signal.action.toUpperCase()} @ ${(signal.confidence * 100).toFixed(0)}% confidence (sentiment adjusted from ${(originalConfidence * 100).toFixed(0)}%)`);
+      }
     }
     
     return signal;
@@ -705,10 +709,10 @@ Response:`;
     }
     
     // MACD confirmation
-    if (macdHistogram > 0 && macd > 0) {
+    if (macd > 0) {
       buyScore += 0.25;
       reasons.push('MACD bullish');
-    } else if (macdHistogram < 0 && macd < 0) {
+    } else if (macd < 0) {
       sellScore += 0.25;
       reasons.push('MACD bearish');
     }
