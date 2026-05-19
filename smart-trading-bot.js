@@ -738,7 +738,9 @@ Response:`;
       signal.action = 'sell';
       signal.confidence = Math.min(sellScore, 0.9);
       signal.reasons = reasons;
-      signal.positionSize = this.portfolio.usdt * 0.5; // Use 50% of available USDT for sell signals
+      signal.positionSize = this.portfolio.usdt * 0.5;
+      signal.stopLoss = data.price * 1.01; // 1% above for sell
+      signal.takeProfit = data.price * 0.98; // 2% below for sell
     }
     
     // Log analysis
@@ -793,6 +795,8 @@ Response:`;
       signal.confidence = Math.min(sellScore, 0.85);
       signal.reasons = reasons;
       signal.positionSize = this.portfolio.usdt * 0.5;
+      signal.stopLoss = data.price * 1.01;
+      signal.takeProfit = data.price * 0.98;
     }
   }
   
@@ -841,6 +845,8 @@ Response:`;
       signal.confidence = Math.min(sellScore, 0.85);
       signal.reasons = reasons;
       signal.positionSize = this.portfolio.usdt * 0.5;
+      signal.stopLoss = data.price * 1.01;
+      signal.takeProfit = data.price * 0.98;
     }
   }
   
@@ -871,6 +877,13 @@ Response:`;
       signal.confidence = Math.min(buyScore, 0.75); // Cap confidence for moonshots
       signal.reasons = reasons;
       this.setRiskManagement(signal, data, 'moonshot');
+    } else if (sellScore >= 0.5) {
+      signal.action = 'sell';
+      signal.confidence = Math.min(sellScore, 0.75);
+      signal.reasons = reasons;
+      signal.positionSize = this.portfolio.usdt * 0.3; // Smaller for moonshot sells
+      signal.stopLoss = data.price * 1.015;
+      signal.takeProfit = data.price * 0.97;
     }
   }
   
@@ -1095,10 +1108,22 @@ Response:`;
         continue;
       }
       
-      // Check if we have enough USDT
-      if (this.portfolio.usdt < signal.positionSize) {
-        logger.warn(`Insufficient USDT for ${signal.pair}: need $${signal.positionSize.toFixed(2)}, have $${this.portfolio.usdt.toFixed(2)}`);
-        continue;
+      // For BUY signals, check USDT balance
+      if (signal.action === 'buy') {
+        if (this.portfolio.usdt < signal.positionSize) {
+          logger.warn(`Insufficient USDT for ${signal.pair}: need $${signal.positionSize.toFixed(2)}, have $${this.portfolio.usdt.toFixed(2)}`);
+          continue;
+        }
+      }
+      
+      // For SELL signals, check asset balance
+      if (signal.action === 'sell') {
+        const baseCurrency = signal.pair.split('-')[0].toLowerCase();
+        const available = this.portfolio.assets[baseCurrency] || 0;
+        if (available <= 0) {
+          logger.info(`No ${baseCurrency.toUpperCase()} to sell for ${signal.pair}`);
+          continue;
+        }
       }
       
       await this.executeTrade(signal);
@@ -1112,57 +1137,92 @@ Response:`;
     logger.info(`   Confidence: ${(confidence * 100).toFixed(0)}%`);
     logger.info(`   Position Size: $${positionSize.toFixed(2)}`);
     logger.info(`   Entry Target: $${entryPrice.toFixed(4)}`);
-    logger.info(`   Stop Loss: $${stopLoss.toFixed(4)} (${signal.stopLossPercent.toFixed(2)}%)`);
-    logger.info(`   Take Profit: $${takeProfit.toFixed(4)} (${signal.takeProfitPercent.toFixed(2)}%)`);
+    if (stopLoss) logger.info(`   Stop Loss: $${stopLoss.toFixed(4)}`);
+    if (takeProfit) logger.info(`   Take Profit: $${takeProfit.toFixed(4)}`);
     logger.info(`   Reasons: ${reasons.join(', ')}`);
     
     try {
       // Get current price
       const currentPrice = await this.getCurrentPrice(pair);
       
-      // Calculate size in base currency
-      const size = positionSize / currentPrice;
-      
-      // Execute buy order
-      const order = await this.makeRequest('POST', '/api/v1/orders', JSON.stringify({
-        clientOid: `bot-${Date.now()}`,
-        side: 'buy',
-        symbol: pair,
-        type: 'market',
-        funds: positionSize.toString()
-      }));
-      
-      logger.info(`✅ BUY EXECUTED: ${pair} - $${positionSize.toFixed(2)} @ $${currentPrice.toFixed(4)}`);
-      logger.info(`   Order ID: ${order.orderId}`);
-      
-      // Create position record
-      const position = {
-        id: `pos-${Date.now()}`,
-        pair,
-        strategy,
-        action: 'buy',
-        entryPrice: currentPrice,
-        size,
-        positionSize,
-        stopLoss,
-        takeProfit,
-        trailingStop: null,
-        confidence,
-        reasons,
-        orderId: order.orderId,
-        timestamp: Date.now()
-      };
-      
-      // Add to open positions
-      this.openPositions.set(position.id, position);
-      
-      // Update portfolio
-      this.portfolio.usdt -= positionSize;
-      
-      // Save state
-      this.saveState();
-      
-      logger.info(`📌 Position opened: ${position.id}`);
+      if (action === 'buy') {
+        // Calculate size in base currency
+        const size = positionSize / currentPrice;
+        
+        // Execute buy order
+        const order = await this.makeRequest('POST', '/api/v1/orders', JSON.stringify({
+          clientOid: `bot-${Date.now()}`,
+          side: 'buy',
+          symbol: pair,
+          type: 'market',
+          funds: positionSize.toString()
+        }));
+        
+        logger.info(`✅ BUY EXECUTED: ${pair} - $${positionSize.toFixed(2)} @ $${currentPrice.toFixed(4)}`);
+        logger.info(`   Order ID: ${order.orderId}`);
+        
+        // Create position record
+        const position = {
+          id: `pos-${Date.now()}`,
+          pair,
+          strategy,
+          action: 'buy',
+          entryPrice: currentPrice,
+          size,
+          positionSize,
+          stopLoss: stopLoss || currentPrice * 0.98,
+          takeProfit: takeProfit || currentPrice * 1.02,
+          trailingStop: null,
+          confidence,
+          reasons,
+          orderId: order.orderId,
+          timestamp: Date.now()
+        };
+        
+        // Add to open positions
+        this.openPositions.set(position.id, position);
+        
+        // Update portfolio
+        this.portfolio.usdt -= positionSize;
+        
+        // Save state
+        this.saveState();
+        
+        logger.info(`📌 Position opened: ${position.id}`);
+        
+      } else if (action === 'sell') {
+        // For sell signals, we need to sell assets we hold
+        const baseCurrency = pair.split('-')[0].toLowerCase();
+        const available = this.portfolio.assets[baseCurrency] || 0;
+        
+        if (available <= 0) {
+          logger.warn(`No ${baseCurrency.toUpperCase()} to sell`);
+          return;
+        }
+        
+        // Calculate size to sell
+        const sizeToSell = Math.min(positionSize / currentPrice, available);
+        
+        // Execute sell order
+        const order = await this.makeRequest('POST', '/api/v1/orders', JSON.stringify({
+          clientOid: `bot-${Date.now()}`,
+          side: 'sell',
+          symbol: pair,
+          type: 'market',
+          size: sizeToSell.toString()
+        }));
+        
+        const sellValue = sizeToSell * currentPrice;
+        logger.info(`✅ SELL EXECUTED: ${pair} - ${sizeToSell.toFixed(6)} @ $${currentPrice.toFixed(4)} = $${sellValue.toFixed(2)}`);
+        logger.info(`   Order ID: ${order.orderId}`);
+        
+        // Update portfolio
+        this.portfolio.assets[baseCurrency] -= sizeToSell;
+        this.portfolio.usdt += sellValue;
+        
+        // Save state
+        this.saveState();
+      }
       
     } catch (error) {
       logger.error(`❌ Trade execution failed: ${error.message}`);
