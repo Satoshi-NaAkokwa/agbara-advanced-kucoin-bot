@@ -735,6 +735,11 @@ Response:`;
       signal.confidence = Math.min(sellScore, 0.9);
       signal.reasons = reasons;
     }
+    
+    // Log analysis
+    if (buyScore > 0.3 || sellScore > 0.3) {
+      logger.info(`    Momentum: buyScore=${buyScore.toFixed(2)}, sellScore=${sellScore.toFixed(2)}, trend=${trend}, RSI=${rsi.toFixed(1)}, MACD=${macd.toFixed(2)}`);
+    }
   }
   
   analyzeScalping(signal, data) {
