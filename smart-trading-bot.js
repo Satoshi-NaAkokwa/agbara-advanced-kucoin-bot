@@ -42,7 +42,7 @@ const CONFIG = {
   // Trading Parameters
   maxPositionSize: parseFloat(process.env.MAX_POSITION_SIZE) || 3,
   minPositionSize: parseFloat(process.env.MIN_POSITION_SIZE) || 0.5,
-  minConfidence: parseFloat(process.env.MIN_CONFIDENCE) || 0.65,
+  minConfidence: parseFloat(process.env.MIN_CONFIDENCE) || 0.55,
   tradingFee: 0.001, // 0.1% KuCoin fee
   minProfitThreshold: 0.003, // Minimum 0.3% profit to cover fees
   
@@ -850,12 +850,13 @@ Response:`;
   }
   
   adjustForSentiment(confidence) {
+    // Reduce sentiment impact for mixed markets
     const sentimentMultiplier = {
       'VERY_BULLISH': 1.15,
       'BULLISH': 1.08,
       'NEUTRAL': 1.0,
-      'BEARISH': 0.92,
-      'VERY_BEARISH': 0.85
+      'BEARISH': 0.95,
+      'VERY_BEARISH': 0.90
     };
     
     return confidence * (sentimentMultiplier[this.marketSentiment] || 1.0);
