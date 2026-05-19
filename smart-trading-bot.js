@@ -725,12 +725,12 @@ Response:`;
     }
     
     // Generate signal
-    if (buyScore > 0.5) {
+    if (buyScore >= 0.5) {
       signal.action = 'buy';
       signal.confidence = Math.min(buyScore, 0.9);
       signal.reasons = reasons;
       this.setRiskManagement(signal, data, 'momentum');
-    } else if (sellScore > 0.5) {
+    } else if (sellScore >= 0.5) {
       signal.action = 'sell';
       signal.confidence = Math.min(sellScore, 0.9);
       signal.reasons = reasons;
@@ -778,12 +778,12 @@ Response:`;
       reasons.push('RSI overbought');
     }
     
-    if (buyScore > 0.4) {
+    if (buyScore >= 0.4) {
       signal.action = 'buy';
       signal.confidence = Math.min(buyScore, 0.85);
       signal.reasons = reasons;
       this.setRiskManagement(signal, data, 'scalping');
-    } else if (sellScore > 0.4) {
+    } else if (sellScore >= 0.4) {
       signal.action = 'sell';
       signal.confidence = Math.min(sellScore, 0.85);
       signal.reasons = reasons;
@@ -825,12 +825,12 @@ Response:`;
       reasons.push('Significant 24h pump');
     }
     
-    if (buyScore > 0.45) {
+    if (buyScore >= 0.45) {
       signal.action = 'buy';
       signal.confidence = Math.min(buyScore, 0.85);
       signal.reasons = reasons;
       this.setRiskManagement(signal, data, 'meanReversion');
-    } else if (sellScore > 0.45) {
+    } else if (sellScore >= 0.45) {
       signal.action = 'sell';
       signal.confidence = Math.min(sellScore, 0.85);
       signal.reasons = reasons;
@@ -859,7 +859,7 @@ Response:`;
       reasons.push('Strong trend with volume');
     }
     
-    if (buyScore > 0.5) {
+    if (buyScore >= 0.5) {
       signal.action = 'buy';
       signal.confidence = Math.min(buyScore, 0.75); // Cap confidence for moonshots
       signal.reasons = reasons;
