@@ -1,0 +1,55 @@
+{
+  "portfolio": {
+    "usdt": 0.00000497,
+    "totalValue": 9.675416358,
+    "assets": {
+      "ETH": 0.0028022,
+      "SOL": 0.044,
+      "KCS": 0.00880073,
+      "BTC": 2.5e-7,
+      "USDT": 0.00000497
+    }
+  },
+  "openPositions": [],
+  "tradeHistory": [],
+  "dailyPnL": 0,
+  "totalTrades": 0,
+  "winCount": 0,
+  "lossCount": 0,
+  "strategyPerformance": {
+    "momentum": {
+      "wins": 0,
+      "losses": 0,
+      "totalProfit": 0,
+      "trades": []
+    },
+    "scalping": {
+      "wins": 0,
+      "losses": 0,
+      "totalProfit": 0,
+      "trades": []
+    },
+    "meanReversion": {
+      "wins": 0,
+      "losses": 0,
+      "totalProfit": 0,
+      "trades": []
+    },
+    "moonshot": {
+      "wins": 0,
+      "losses": 0,
+      "totalProfit": 0,
+      "trades": []
+    }
+  },
+  "marketSentiment": "NEUTRAL",
+  "fearGreedIndex": 50,
+  "config": {
+    "momentum": 0.35,
+    "scalping": 0.25,
+    "meanReversion": 0.25,
+    "moonshot": 0.15,
+    "reserve": 0.1
+  },
+  "lastSaved": 1779212730713
+}

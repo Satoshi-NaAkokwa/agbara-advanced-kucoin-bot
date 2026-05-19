@@ -1,18 +1,48 @@
-# 🤖 Intelligent Self-Learning KuCoin Trading Bot
+# 🤖 Smart Trading Bot v4.0 - Professional Grade
 
-[![Version](https://img.shields.io/badge/version-3.0.0-blue.svg)](https://github.com/Satoshi-NaAkokwa/agbara-advanced-kucoin-bot)
+[![Version](https://img.shields.io/badge/version-4.0.0-blue.svg)](https://github.com/Satoshi-NaAkokwa/agbara-advanced-kucoin-bot)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)](https://nodejs.org)
 
-An advanced, self-learning cryptocurrency trading bot for KuCoin with adaptive strategies, pattern recognition, and intelligent decision-making capabilities.
+A professional-grade cryptocurrency trading bot for KuCoin with **proper stop-loss/take-profit execution**, **real profit tracking**, **LLM-powered sentiment analysis**, **multi-asset portfolio management**, and **intelligent exit strategies**.
 
-## 🌟 Features
+## 🌟 NEW in v4.0
 
-### Intelligent Trading
-- 🧠 **Self-Learning**: Learns from past trades and adapts strategies
-- 📊 **Pattern Recognition**: Identifies and learns from market patterns
-- 🔄 **Adaptive Strategies**: Automatically adjusts strategy weights based on performance
-- 🎯 **Multi-Strategy Approach**: Combines momentum, scalping, mean reversion, and pattern recognition
+### ✅ Proper Stop-Loss/Take-Profit Execution
+- Dynamic stop-loss based on ATR (Average True Range)
+- Trailing stops that lock in profits as price moves up
+- Risk-reward ratio minimum of 2:1 for every trade
+- Automatic position management with exit strategies
+
+### ✅ Real Profit Tracking & Machine Learning
+- Actual PnL calculated for every trade
+- Win rate tracking per strategy
+- Automatic strategy weight adjustment based on performance
+- Learning from both winning and losing trades
+
+### ✅ LLM-Powered Sentiment Analysis
+- Integration with local LLM (Ollama/Llama2)
+- Market sentiment classification (Very Bullish → Very Bearish)
+- Fear/Greed Index calculation
+- Sentiment-adjusted confidence scoring
+
+### ✅ Multi-Asset Portfolio Management
+- 4 strategy categories with different trading pairs
+- Dynamic capital allocation per strategy
+- Portfolio rebalancing based on performance
+- Maximum 10 concurrent positions
+
+### ✅ Intelligent Exit Strategies
+- Stop-loss triggers
+- Take-profit triggers
+- Trailing stop activation
+- Time-based exits for profitable positions
+
+### 🧠 Core Features
+- 📊 **Technical Analysis**: RSI, MACD, Bollinger Bands, SMA, EMA, ATR
+- 🔄 **Adaptive Strategies**: Automatically adjusts based on performance
+- 🎯 **Multi-Strategy Approach**: Momentum, Scalping, Mean Reversion, Moonshot
+- 💰 **Fee-Aware Trading**: Only enters trades that can cover fees profitably
 
 ### Technical Analysis
 - 📈 **RSI (Relative Strength Index)**: Identifies overbought/oversold conditions
