@@ -41,7 +41,7 @@ const logger = winston.createLogger({
 const CONFIG = {
   // Trading Parameters
   maxPositionSize: parseFloat(process.env.MAX_POSITION_SIZE) || 3,
-  minPositionSize: 2, // KuCoin minimum is around $1-2
+  minPositionSize: 2.5, // KuCoin minimum is around $2-5 for most pairs
   minConfidence: parseFloat(process.env.MIN_CONFIDENCE) || 0.55,
   tradingFee: 0.001, // 0.1% KuCoin fee
   minProfitThreshold: 0.003, // Minimum 0.3% profit to cover fees
@@ -918,19 +918,14 @@ Response:`;
       signal.takeProfitPercent = minProfitPercent;
     }
     
-    // Position size based on confidence and strategy allocation
-    const allocations = this.calculatePositionAllocation();
-    const strategyAllocation = allocations[strategy] || CONFIG.maxPositionSize;
+    // Position size based on confidence and available capital
+    // Ensure minimum $2.50 for KuCoin requirements
+    const baseSize = CONFIG.maxPositionSize * signal.confidence;
+    signal.positionSize = Math.max(CONFIG.minPositionSize, Math.min(baseSize, this.portfolio.usdt * 0.8));
     
-    signal.positionSize = Math.min(
-      strategyAllocation * signal.confidence,
-      CONFIG.maxPositionSize,
-      this.portfolio.usdt * 0.9 // Never use more than 90% of available USDT
-    );
-    
-    // Ensure minimum position size
+    // If still too small, don't trade
     if (signal.positionSize < CONFIG.minPositionSize) {
-      signal.action = 'hold'; // Don't trade if too small
+      signal.action = 'hold';
     }
   }
   
