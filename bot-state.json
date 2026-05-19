@@ -1,7 +1,7 @@
 {
   "portfolio": {
-    "usdt": 3.71778497,
-    "totalValue": 9.663360149999999,
+    "usdt": 1.2177849699999999,
+    "totalValue": 9.665948174,
     "assets": {
       "ETH": 0.0028022,
       "USDT": 3.71778497,
@@ -9,7 +9,30 @@
       "BTC": 2.5e-7
     }
   },
-  "openPositions": [],
+  "openPositions": [
+    [
+      "pos-1779213635521",
+      {
+        "id": "pos-1779213635521",
+        "pair": "BTC-USDT",
+        "strategy": "momentum",
+        "action": "buy",
+        "entryPrice": 76849.6,
+        "size": 0.000032531073681580643,
+        "positionSize": 2.5,
+        "stopLoss": 76663.3142857143,
+        "takeProfit": 77308.585,
+        "trailingStop": null,
+        "confidence": 0.405,
+        "reasons": [
+          "RSI bullish momentum",
+          "MACD bullish"
+        ],
+        "orderId": "6a0ca54314e6f800078648ff",
+        "timestamp": 1779213635521
+      }
+    ]
+  ],
   "tradeHistory": [],
   "dailyPnL": 0,
   "totalTrades": 0,
@@ -50,5 +73,5 @@
     "moonshot": 0.15,
     "reserve": 0.1
   },
-  "lastSaved": 1779213537707
+  "lastSaved": 1779213635521
 }

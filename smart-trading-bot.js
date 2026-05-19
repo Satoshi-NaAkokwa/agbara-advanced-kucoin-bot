@@ -738,6 +738,7 @@ Response:`;
       signal.action = 'sell';
       signal.confidence = Math.min(sellScore, 0.9);
       signal.reasons = reasons;
+      signal.positionSize = this.portfolio.usdt * 0.5; // Use 50% of available USDT for sell signals
     }
     
     // Log analysis
@@ -791,6 +792,7 @@ Response:`;
       signal.action = 'sell';
       signal.confidence = Math.min(sellScore, 0.85);
       signal.reasons = reasons;
+      signal.positionSize = this.portfolio.usdt * 0.5;
     }
   }
   
@@ -838,6 +840,7 @@ Response:`;
       signal.action = 'sell';
       signal.confidence = Math.min(sellScore, 0.85);
       signal.reasons = reasons;
+      signal.positionSize = this.portfolio.usdt * 0.5;
     }
   }
   
