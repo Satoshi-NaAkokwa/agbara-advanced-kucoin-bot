@@ -40,8 +40,8 @@ const logger = winston.createLogger({
 
 const CONFIG = {
   // Trading Parameters
-  maxPositionSize: parseFloat(process.env.MAX_POSITION_SIZE) || 20,
-  minPositionSize: 5,
+  maxPositionSize: parseFloat(process.env.MAX_POSITION_SIZE) || 3,
+  minPositionSize: parseFloat(process.env.MIN_POSITION_SIZE) || 0.5,
   minConfidence: parseFloat(process.env.MIN_CONFIDENCE) || 0.65,
   tradingFee: 0.001, // 0.1% KuCoin fee
   minProfitThreshold: 0.003, // Minimum 0.3% profit to cover fees

@@ -1,13 +1,12 @@
 {
   "portfolio": {
-    "usdt": 0.00000497,
-    "totalValue": 9.675416358,
+    "usdt": 3.71778497,
+    "totalValue": 9.661928602999998,
     "assets": {
       "ETH": 0.0028022,
-      "SOL": 0.044,
-      "KCS": 0.00880073,
-      "BTC": 2.5e-7,
-      "USDT": 0.00000497
+      "USDT": 3.71778497,
+      "KCS": 0.00842482,
+      "BTC": 2.5e-7
     }
   },
   "openPositions": [],
@@ -42,8 +41,8 @@
       "trades": []
     }
   },
-  "marketSentiment": "NEUTRAL",
-  "fearGreedIndex": 50,
+  "marketSentiment": "VERY_BEARISH",
+  "fearGreedIndex": 20,
   "config": {
     "momentum": 0.35,
     "scalping": 0.25,
@@ -51,5 +50,5 @@
     "moonshot": 0.15,
     "reserve": 0.1
   },
-  "lastSaved": 1779212730713
+  "lastSaved": 1779212900002
 }
