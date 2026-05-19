@@ -274,13 +274,19 @@ class SmartTradingBot {
     const analysis = {};
     const allPairs = [...new Set(Object.values(CONFIG.tradingPairs).flat())];
     
+    logger.info(`\n📈 Analyzing ${allPairs.length} trading pairs...`);
+    
     for (const pair of allPairs) {
       try {
         // Fetch klines (OHLCV data)
         const klines = await this.makeRequest('GET', `/api/v1/market/candles?symbol=${pair}&type=5min&limit=200`);
         
-        if (!klines || klines.length < 50) continue;
+        if (!klines || klines.length < 50) {
+          logger.warn(`Insufficient data for ${pair}: ${klines ? klines.length : 0} candles`);
+          continue;
+        }
         
+        // KuCoin returns newest first, so reverse
         const closes = klines.map(k => parseFloat(k[2])).reverse();
         const highs = klines.map(k => parseFloat(k[3])).reverse();
         const lows = klines.map(k => parseFloat(k[4])).reverse();
@@ -599,6 +605,8 @@ Response:`;
   generateSignals() {
     const signals = [];
     
+    logger.info(`\n🔍 Generating signals for ${this.marketData.size} pairs...`);
+    
     for (const [pair, data] of this.marketData) {
       // Determine which strategy applies to this pair
       const strategies = this.getApplicableStrategies(pair);
@@ -606,8 +614,13 @@ Response:`;
       for (const strategy of strategies) {
         const signal = this.generateStrategySignal(pair, data, strategy);
         
-        if (signal && signal.action !== 'hold' && signal.confidence >= CONFIG.minConfidence) {
-          signals.push(signal);
+        if (signal && signal.action !== 'hold') {
+          logger.info(`  ${pair} (${strategy}): ${signal.action.toUpperCase()} @ ${(signal.confidence * 100).toFixed(0)}% confidence`);
+          if (signal.confidence >= CONFIG.minConfidence) {
+            signals.push(signal);
+          } else {
+            logger.info(`    ❌ Below threshold (${(signal.confidence * 100).toFixed(0)}% < ${(CONFIG.minConfidence * 100).toFixed(0)}%)`);
+          }
         }
       }
     }
