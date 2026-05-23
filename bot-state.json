@@ -1,134 +1,48 @@
 {
   "portfolio": {
-    "usdt": 1.2252,
-    "totalValue": 9.81,
+    "usdt": 0.00124614,
+    "totalValue": 9.491162742,
     "assets": {
-      "ETH": 0.001711,
-      "BTC": 0.00006320,
-      "USDT": 1.2252,
-      "KCS": 0.006561
+      "BTC": 0.00007899,
+      "ETH": 0.0017109,
+      "KCS": 0.00631651,
+      "USDT": 0.00124614
     }
   },
-  "openPositions": {
-    "pos-eth-003": {
-      "id": "pos-eth-003",
-      "pair": "ETH-USDT",
-      "strategy": "validated-profit-taking",
-      "action": "buy",
-      "entryPrice": 2132.04,
-      "size": 0.001711,
-      "positionSize": 3.67,
-      "originalSize": 0.004562,
-      "partialProfitTaken": true,
-      "firstProfitSecured": 4.90,
-      "secondProfitSecured": 1.22,
-      "totalProfitSecured": 6.12,
-      "remainingSize": 0.001711,
-      "stopLoss": 2089.40,
-      "takeProfit": 2238.64,
-      "trailingStop": null,
-      "confidence": 0.90,
-      "reasons": [
-        "Order validation fixed",
-        "Strategic profit-taking",
-        "25% partial profit taken"
-      ],
-      "orderId": "6a0df28ca8a31b0007c87730",
-      "timestamp": 1779276900000,
-      "status": "partial-exit-2"
-    },
-    "pos-btc-001": {
-      "id": "pos-btc-001",
-      "pair": "BTC-USDT",
-      "strategy": "validated-entry",
-      "action": "buy",
-      "entryPrice": 77548.00,
-      "size": 0.00006320,
-      "positionSize": 4.90,
-      "stopLoss": 75221.56,
-      "takeProfit": 81425.40,
-      "trailingStop": null,
-      "confidence": 0.75,
-      "reasons": [
-        "Order validation fixed",
-        "Proper size rounding",
-        "KuCoin requirements met"
-      ],
-      "orderId": "6a0df0beb7d8600007be577e",
-      "timestamp": 1779276200000,
-      "status": "open"
-    }
-  },
-  "tradeHistory": [
-    {
-      "id": "trade-001",
-      "pair": "ETH-USDT",
-      "action": "buy",
-      "entryPrice": 2132.04,
-      "size": 0.004562,
-      "positionSize": 9.73,
-      "pnl": 0.08,
-      "pnlPercent": 0.82,
-      "partialExits": [
-        {
-          "timestamp": 1779276094000,
-          "size": 0.002281,
-          "value": 4.90,
-          "pnl": 0.03,
-          "pnlPercent": 0.57
-        },
-        {
-          "timestamp": 1779276900000,
-          "size": 0.000570,
-          "value": 1.22,
-          "pnl": 0.02,
-          "pnlPercent": 0.53
-        }
-      ],
-      "timestamp": 1779271150000,
-      "status": "multiple-exits"
-    },
-    {
-      "id": "trade-002",
-      "pair": "BTC-USDT",
-      "action": "buy",
-      "entryPrice": 77548.00,
-      "exitPrice": null,
-      "size": 0.00006320,
-      "positionSize": 4.90,
-      "pnl": 0,
-      "timestamp": 1779276200000,
-      "status": "open"
-    }
-  ],
-  "dailyPnL": 0.05,
-  "totalTrades": 4,
-  "winCount": 2,
+  "openPositions": [],
+  "tradeHistory": [],
+  "dailyPnL": 0,
+  "totalTrades": 0,
+  "winCount": 0,
   "lossCount": 0,
-  "profitableTrades": [
-    {
-      "tradeId": "trade-001",
-      "profit": 0.08,
-      "profitPercentage": 0.82,
-      "partialProfitsSecured": 6.12
-    }
-  ],
   "strategyPerformance": {
-    "validated-profit-taking": {
-      "wins": 1,
-      "losses": 0,
-      "totalProfit": 0.08,
-      "trades": ["pos-eth-003"]
-    },
-    "validated-entry": {
+    "momentum": {
       "wins": 0,
       "losses": 0,
       "totalProfit": 0,
-      "trades": ["pos-btc-001"]
+      "trades": []
+    },
+    "scalping": {
+      "wins": 0,
+      "losses": 0,
+      "totalProfit": 0,
+      "trades": []
+    },
+    "meanReversion": {
+      "wins": 0,
+      "losses": 0,
+      "totalProfit": 0,
+      "trades": []
+    },
+    "moonshot": {
+      "wins": 0,
+      "losses": 0,
+      "totalProfit": 0,
+      "trades": []
     }
   },
-  "marketSentiment": "BULLISH",
-  "fearGreedIndex": 65,
+  "marketSentiment": "VERY_BEARISH",
+  "fearGreedIndex": 20,
   "config": {
     "momentum": 0.35,
     "scalping": 0.25,
@@ -136,5 +50,5 @@
     "moonshot": 0.15,
     "reserve": 0.1
   },
-  "lastSaved": 1779277000000
+  "lastSaved": 1779496521870
 }
