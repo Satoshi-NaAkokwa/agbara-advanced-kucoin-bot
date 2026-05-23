@@ -1,7 +1,7 @@
 {
   "portfolio": {
     "usdt": 0.00124614,
-    "totalValue": 9.491162742,
+    "totalValue": 9.467154336,
     "assets": {
       "BTC": 0.00007899,
       "ETH": 0.0017109,
@@ -50,5 +50,5 @@
     "moonshot": 0.15,
     "reserve": 0.1
   },
-  "lastSaved": 1779496521870
+  "lastSaved": 1779496981474
 }
